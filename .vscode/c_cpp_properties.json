@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/src/linux-headers-6.17.0-14-generic/include",
+                "/usr/src/linux-headers-6.17.0-14-generic/arch/x86/include",
+                "/usr/src/linux-headers-6.17.0-14-generic/arch/x86/include/generated"
+            ],
+            "defines": ["__GNUC__", "__KERNEL__"],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
