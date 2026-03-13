@@ -80,9 +80,8 @@ void scheduler_handler(int signum) {
     if (search_count == active_tasks) return;
 
     
-    printf("\n[OS Scheduler] Time Quantum Out. Switching: %s -> %s\n", 
-           tcb_pool[current_idx].name, tcb_pool[next_idx].name);
-    fflush(stdout);
+    const char *msg = "\n[OS Scheduler] Time Quantum Out. Context Switching...\n";
+    write(STDOUT_FILENO, msg, 55);
 
     current_idx = next_idx;
     if (pthread_mutex_trylock(&tcb_pool[current_idx].mutex) == 0) {
@@ -101,6 +100,9 @@ void *thread_func(void *arg) {
         while (my_tcb->state != RUNNING && my_tcb->state != TERMINATED) {
             pthread_cond_wait(&my_tcb->cond, &my_tcb->mutex);
         }
+        // if (my_tcb->state == RUNNING) {
+        //     printf("[%s] I am now running!\n", my_tcb->name); 
+        // }
         if (my_tcb->state == TERMINATED) {
             pthread_mutex_unlock(&my_tcb->mutex);
             break;
@@ -174,9 +176,9 @@ int main(int argc, char *argv[]) {
 
     struct itimerval timer;
     timer.it_value.tv_sec = 0;
-    timer.it_value.tv_usec = 500000;
+    timer.it_value.tv_usec = 20000;
     timer.it_interval.tv_sec = 0;
-    timer.it_interval.tv_usec = 500000;
+    timer.it_interval.tv_usec = 20000;
     setitimer(ITIMER_REAL, &timer, NULL); 
 
     for (int i = 0; i < active_tasks; i++) pthread_join(tcb_pool[i].p_tid, NULL);
