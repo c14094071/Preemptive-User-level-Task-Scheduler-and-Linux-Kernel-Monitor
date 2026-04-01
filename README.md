@@ -15,7 +15,7 @@
 * 實作 `msg_pool` 陣列，確保不同 PID 的執行緒在讀取監控資訊時不會互相干擾。
 
 ### 2. 使用者空間排程 (User Space)
-* **Round-Robin 排程**：利用 `SIGALRM` 訊號與 `setitimer` 實作每 10ms 一次的強制任務換手 (Preemptive Scheduling)。
+* **Round-Robin 排程**：利用 `SIGALRM` 訊號與 `setitimer` 實作每 20ms 一次的強制任務換手 (Preemptive Scheduling)。
 * **TCB 管理**：維護TCB，追蹤 `READY`、`RUNNING` 與 `TERMINATED` 狀態。
 * **任務**：Task 1 (CPU )：執行大規模矩陣乘法運算。Task 2 (I/O)：定時向核心回報「心跳」訊息並讀取監控數據。
 
