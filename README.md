@@ -35,6 +35,7 @@
 ## 快速開始
 
 ```bash
+cd 3/3_2
 make all
 make load
 make Prog_2thread
